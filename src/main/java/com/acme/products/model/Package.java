@@ -1,7 +1,10 @@
 package com.acme.products.model;
 
+import com.acme.products.model.provider.Provider;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,13 +28,18 @@ public class Package {
     // Date on which package becomes unavailable
     private Date packageExpiry;
 
-    public Package(int id, String publicId, String description, String destination, int numberNights) {
+    // Collection of providers
+    private ArrayList<Provider> providers = new ArrayList<>();
+
+    public Package(int id, String publicId, String description, String destination, int numberNights,ArrayList<Provider> providers ) {
         this.id = id;
         this.publicId = publicId;
         this.description = description;
         this.destination = destination;
         this.numberNights = numberNights;
+        this.providers = providers;
     }
+
 
     public String toJson(){
         JSONObject jsonObject = new JSONObject();
@@ -39,6 +47,14 @@ public class Package {
         jsonObject.put("publicId", publicId);
         jsonObject.put("description", description);
         jsonObject.put("numberNights", numberNights);
+
+        JSONArray jsonArray = new JSONArray();
+        for(Provider provider : providers) {
+            jsonArray.put(provider.toJSON());
+        }
+
+        jsonObject.put("providers", jsonArray);
+
         return jsonObject.toString(4);
     }
 
@@ -56,5 +72,9 @@ public class Package {
 
     public int getNumberNights() {
         return numberNights;
+    }
+
+    public ArrayList<Provider> getProviders(){
+        return providers;
     }
 }

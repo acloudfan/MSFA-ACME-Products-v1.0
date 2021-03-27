@@ -1,5 +1,7 @@
 package com.acme.products.model.provider;
 
+import org.json.JSONObject;
+
 public class CruiseProvider implements Provider {
 
     private String name;
@@ -19,16 +21,27 @@ public class CruiseProvider implements Provider {
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String getDescription() {
-        return null;
+        return description;
     }
 
     @Override
     public int getRating() {
         return rating;
+    }
+
+    @Override
+    public String toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("type", "Cruise");
+        jsonObject.put("name", name);
+        jsonObject.put("description", description);
+        jsonObject.put("rating", rating);
+
+        return jsonObject.toString(4);
     }
 }

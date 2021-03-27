@@ -5,6 +5,7 @@ public interface Provider {
     public enum ProviderType {
         HOTEL,
         CRUISE,
+        AIRLINE,
         EXCURSION
     }
 
@@ -19,4 +20,7 @@ public interface Provider {
 
     // Customer rating between 1 to 5
     public int getRating();
+
+    // Returns the JSON
+    public String toJSON();
 }

@@ -1,0 +1,23 @@
+#Schema Definition Language used for describing the schema in domain terms
+#https://graphql.org/learn/schema/
+
+type Query {
+    packages(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Package]
+}
+
+# This is the representation the package
+type Package {
+    publicId: String!
+    description: String!
+    numberNights: Int!
+    destination: String!
+    providers: [Provider!]
+}
+
+# This is the representation for the provider type
+type Provider {
+    type: String!
+    name: String!
+    rating: Int!
+    description: String!
+}
