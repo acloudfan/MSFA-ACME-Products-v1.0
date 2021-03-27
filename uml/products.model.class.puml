@@ -1,0 +1,28 @@
+@startuml
+
+package com.acme.products.model.provider {
+    interface Provider {
+        Enumeration ProviderType
+        + name() : String
+        + description()
+        + type() : ProviderType
+        + rating() : Int
+    }
+
+    class HotelProvider implements Provider
+    class CruiseProvider implements Provider
+    class AirlineProvider implements Provider
+}
+
+package com.acme.products.model {
+   class Package {
+    + publicId : String
+    + description : String
+    + providers : Provider[]
+   }
+
+   Package "1" o-- "*" Provider
+}
+
+title   "\n\nClass diagram for Products model"
+@enduml
