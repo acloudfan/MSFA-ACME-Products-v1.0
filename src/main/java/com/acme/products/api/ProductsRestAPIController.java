@@ -29,13 +29,6 @@ public class ProductsRestAPIController {
     @Autowired
     private ProviderRepo providerRepo;
 
-//    @Bean
-//    public PackageRepo getPackageRepo(){
-//        return new PackageFakeRepo();
-//    }
-
-
-
     /**
      * Receives a JSON with info on vacation packages
      */

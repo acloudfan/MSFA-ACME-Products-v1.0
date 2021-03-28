@@ -45,6 +45,7 @@ public class Product {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", id);
         jsonObject.put("publicId", publicId);
+        jsonObject.put("destination", destination);
         jsonObject.put("description", description);
         jsonObject.put("numberNights", numberNights);
 

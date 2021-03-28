@@ -13,6 +13,11 @@ package com.acme.products.model.provider {
     class HotelProvider implements Provider
     class CruiseProvider implements Provider
     class AirlineProvider implements Provider
+
+    interface ProviderRepo {
+     + findProvider(id : Int) : Provider
+     + addProvider(Provider)
+    }
 }
 
 package com.acme.products.model {
@@ -23,6 +28,11 @@ package com.acme.products.model {
    }
 
    Product "1" o-- "*" Provider
+
+   interface ProductRepo {
+     + addProduct(Product)
+     + findProduct(publicId, dest, minNight, maxNight)
+   }
 }
 
 'title   "\n\nClass diagram for Products model\n\n"

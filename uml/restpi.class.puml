@@ -5,16 +5,29 @@ package com.acme.products.api {
     class ProductsRestAPIController {
         @SpringBootApplication
         @RestController
-        + @GetMapping(path="/packages", produces= MediaType.APPLICATION_JSON_VALUE)
+        + @GetMapping(path="/products", produces= MediaType.APPLICATION_JSON_VALUE)
         + @GetMapping(path="/providers", produces= MediaType.APPLICATION_JSON_VALUE)
     }
+
+
 }
 
 package com.acme.tests {
-    class RunPackageRESTApi{
+    class RunProductsRESTApi{
         + main()
     }
+
+    class ProductsFakeRepo implements com.acme.model.ProductRepo{
+    }
+
+    class ProviderFakeRepo implements com.acme.model.provider.ProviderRepo{
+    }
+
+    ProductsRestAPIController --> ProductsFakeRepo : uses
+    ProductsRestAPIController --> ProviderFakeRepo : uses
 }
-RunPackageRESTApi --> ProductsRestAPIController : Launches
+RunProductsRESTApi --> ProductsRestAPIController : Launches
+
+
 
 @enduml
