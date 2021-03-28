@@ -1,6 +1,6 @@
 package com.acme.tests;
 
-import com.acme.products.api.PackageRestAPIController;
+import com.acme.products.api.ProductsRestAPIController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,6 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class RunPackageRESTApi {
 
     public static void main(String[] args){
-        SpringApplication.run(PackageRestAPIController.class, args);
+        SpringApplication.run(ProductsRestAPIController.class, args);
     }
 }

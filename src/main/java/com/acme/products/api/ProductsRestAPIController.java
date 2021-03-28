@@ -1,10 +1,9 @@
 package com.acme.products.api;
 
-import com.acme.products.model.Package;
-import com.acme.products.model.PackageRepo;
+import com.acme.products.model.Product;
+import com.acme.products.model.ProductRepo;
 import com.acme.products.model.ProviderRepo;
 import com.acme.products.model.provider.Provider;
-import com.acme.tests.ProviderFakeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -22,10 +21,10 @@ import java.util.ArrayList;
 @SpringBootApplication(scanBasePackages = {"com.acme.products.model", "com.acme.products.model.provider"})
 @RestController
 @ComponentScan("com.acme.tests")
-public class PackageRestAPIController {
+public class ProductsRestAPIController {
 
     @Autowired
-    private PackageRepo packageRepo;
+    private ProductRepo productRepo;
 
     @Autowired
     private ProviderRepo providerRepo;
@@ -40,16 +39,16 @@ public class PackageRestAPIController {
     /**
      * Receives a JSON with info on vacation packages
      */
-    @GetMapping(path="/packages", produces= MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path="/products", produces= MediaType.APPLICATION_JSON_VALUE)
     public String getPackages(@RequestParam(name="publicId", required=false, defaultValue = "") String publicId,
-                              @RequestParam(name="name", required=false, defaultValue = "") String dest,
+                              @RequestParam(name="dest", required=false, defaultValue = "") String dest,
                               @RequestParam(name="minNight", required=false, defaultValue = "0") int minNight,
                               @RequestParam(name="maxNight", required=false, defaultValue = "1000") int maxNight){
 
-        ArrayList<Package> packages = packageRepo.findPackage(publicId,dest,minNight,maxNight);
+        ArrayList<Product> products = productRepo.findPackage(publicId,dest,minNight,maxNight);
         String json ="[";
         boolean firstElement = true;
-        for(Package p : packages){
+        for(Product p : products){
             if(!firstElement) {
                 json += ",";
             }

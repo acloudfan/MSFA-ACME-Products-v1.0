@@ -1,9 +1,8 @@
 package com.acme.products.graphql;
 
-import com.acme.products.model.Package;
-import com.acme.products.model.PackageRepo;
+import com.acme.products.model.Product;
+import com.acme.products.model.ProductRepo;
 import com.acme.products.model.ProviderRepo;
-import com.acme.products.model.provider.HotelProvider;
 import com.acme.products.model.provider.Provider;
 import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 public class GraphQLDataFetchers implements DataFetcher {
 
     @Autowired
-    private PackageRepo packageRepo;
+    private ProductRepo productRepo;
 
     @Autowired
     private ProviderRepo providerRepo;
@@ -44,12 +43,12 @@ public class GraphQLDataFetchers implements DataFetcher {
                 System.out.println("Query criteria="+publicId+" "+destination+" "+numberNightsMin+" "+numberNightsMax);
 
                 // 1. Find the packages
-                ArrayList<Package> packagesList = packageRepo.findPackage(publicId,destination,numberNightsMin,numberNightsMax);
+                ArrayList<Product> packagesList = productRepo.findPackage(publicId,destination,numberNightsMin,numberNightsMax);
 
                 // 2. For each package
                 ArrayList<PackagesQueryModel>  packagesQueryModels = new ArrayList<>();
-                for(Package vPackage : packagesList){
-                    ArrayList<Integer> providerIds = vPackage.getProviders();
+                for(Product vProduct : packagesList){
+                    ArrayList<Integer> providerIds = vProduct.getProviders();
 
                     // 3. For each provider ID, get the provider object
                     ArrayList<Provider> providers = new ArrayList<>();
@@ -57,7 +56,7 @@ public class GraphQLDataFetchers implements DataFetcher {
                         Provider provider = providerRepo.findProvider(providerId);
                         providers.add(provider);
                     }
-                    packagesQueryModels.add(new PackagesQueryModel(vPackage, providers));
+                    packagesQueryModels.add(new PackagesQueryModel(vProduct, providers));
                 }
 
                 return packagesQueryModels ;

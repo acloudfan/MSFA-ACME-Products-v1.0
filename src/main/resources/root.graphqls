@@ -2,7 +2,7 @@
 #https://graphql.org/learn/schema/
 
 type Query {
-    packages(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Package]
+    products(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Package]
     providers(id: Int!): Provider
 }
 

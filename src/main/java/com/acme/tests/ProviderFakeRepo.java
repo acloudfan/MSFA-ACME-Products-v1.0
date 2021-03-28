@@ -1,6 +1,5 @@
 package com.acme.tests;
 
-import com.acme.products.model.PackageRepo;
 import com.acme.products.model.ProviderRepo;
 import com.acme.products.model.provider.AirlineProvider;
 import com.acme.products.model.provider.CruiseProvider;

@@ -1,6 +1,6 @@
 package com.acme.products.graphql;
 
-import com.acme.products.model.Package;
+import com.acme.products.model.Product;
 import com.acme.products.model.provider.Provider;
 
 import java.util.ArrayList;
@@ -8,31 +8,31 @@ import java.util.ArrayList;
 public class PackagesQueryModel  {
 
     // Holds the package object
-    private  Package vPackage;
+    private Product vProduct;
 
     // Holds the providers
     ArrayList<Provider>  providers;
 
-    public PackagesQueryModel(Package vPackage, ArrayList<Provider>  providers){
-        this.vPackage = vPackage;
+    public PackagesQueryModel(Product vProduct, ArrayList<Provider>  providers){
+        this.vProduct = vProduct;
         this.providers = providers;
     }
 
     // Exposes the same methods as the Package object
     public String getDescription() {
-        return vPackage.getDescription();
+        return vProduct.getDescription();
     }
 
     public String getPublicId() {
-        return vPackage.getPublicId();
+        return vProduct.getPublicId();
     }
 
     public String getDestination() {
-        return vPackage.getDestination();
+        return vProduct.getDestination();
     }
 
     public int getNumberNights() {
-        return vPackage.getNumberNights();
+        return vProduct.getNumberNights();
     }
 
     // This one is different from the Package class

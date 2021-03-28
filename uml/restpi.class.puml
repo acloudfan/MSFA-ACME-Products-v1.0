@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+package com.acme.products.api {
+    class ProductsRestAPIController {
+        @SpringBootApplication
+        @RestController
+        + @GetMapping(path="/packages", produces= MediaType.APPLICATION_JSON_VALUE)
+        + @GetMapping(path="/providers", produces= MediaType.APPLICATION_JSON_VALUE)
+    }
+}
+
+package com.acme.tests {
+    class RunPackageRESTApi{
+        + main()
+    }
+}
+RunPackageRESTApi --> ProductsRestAPIController : Launches
+
+@enduml

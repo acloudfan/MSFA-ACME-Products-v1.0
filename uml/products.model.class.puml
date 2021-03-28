@@ -1,0 +1,30 @@
+@startuml
+
+package com.acme.products.model.provider {
+    interface Provider {
+        Enumeration ProviderType
+        + id() : Int
+        + name() : String
+        + description()
+        + type() : ProviderType
+        + rating() : Int
+    }
+
+    class HotelProvider implements Provider
+    class CruiseProvider implements Provider
+    class AirlineProvider implements Provider
+}
+
+package com.acme.products.model {
+   class Product {
+    + publicId : String
+    + description : String
+    + providers : Provider[]
+   }
+
+   Product "1" o-- "*" Provider
+}
+
+'title   "\n\nClass diagram for Products model\n\n"
+'footer  "Part of the course on Microservices"
+@enduml
