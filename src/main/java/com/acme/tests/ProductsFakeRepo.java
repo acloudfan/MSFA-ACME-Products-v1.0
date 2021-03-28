@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 
 @Component
-public class PackagesFakeRepo implements ProductRepo {
+public class ProductsFakeRepo implements ProductRepo {
 
     // Collection of packages
     private ArrayList<Product> collection = new ArrayList<>();
@@ -56,7 +56,7 @@ public class PackagesFakeRepo implements ProductRepo {
     public ProductRepo getPackageRepo(){
         System.out.println("Initializing Fake Packages Repo");
 
-        ProductRepo productRepo = new PackagesFakeRepo();
+        ProductRepo productRepo = new ProductsFakeRepo();
 
         ArrayList<Integer> providers;
 
