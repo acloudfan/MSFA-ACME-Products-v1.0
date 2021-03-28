@@ -9,6 +9,9 @@ public interface Provider {
         EXCURSION
     }
 
+    // Id of the provider
+    public int  getId();
+
     // Get the type
     public ProviderType getType();
 

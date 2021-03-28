@@ -29,9 +29,9 @@ public class Package {
     private Date packageExpiry;
 
     // Collection of providers
-    private ArrayList<Provider> providers = new ArrayList<>();
+    private ArrayList<Integer> providers = new ArrayList<>();
 
-    public Package(int id, String publicId, String description, String destination, int numberNights,ArrayList<Provider> providers ) {
+    public Package(int id, String publicId, String description, String destination, int numberNights,ArrayList<Integer> providers ) {
         this.id = id;
         this.publicId = publicId;
         this.description = description;
@@ -49,8 +49,8 @@ public class Package {
         jsonObject.put("numberNights", numberNights);
 
         JSONArray jsonArray = new JSONArray();
-        for(Provider provider : providers) {
-            jsonArray.put(provider.toJSON());
+        for(int provider : providers) {
+            jsonArray.put(provider);
         }
 
         jsonObject.put("providers", jsonArray);
@@ -74,7 +74,7 @@ public class Package {
         return numberNights;
     }
 
-    public ArrayList<Provider> getProviders(){
+    public ArrayList<Integer> getProviders(){
         return providers;
     }
 }

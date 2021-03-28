@@ -3,6 +3,7 @@
 
 type Query {
     packages(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Package]
+    providers(id: Int!): Provider
 }
 
 # This is the representation the package
@@ -16,6 +17,7 @@ type Package {
 
 # This is the representation for the provider type
 type Provider {
+    id: Int!
     type: String!
     name: String!
     rating: Int!

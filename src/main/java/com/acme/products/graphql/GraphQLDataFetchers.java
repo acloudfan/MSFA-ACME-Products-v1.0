@@ -1,6 +1,8 @@
 package com.acme.products.graphql;
 
+import com.acme.products.model.Package;
 import com.acme.products.model.PackageRepo;
+import com.acme.products.model.ProviderRepo;
 import com.acme.products.model.provider.HotelProvider;
 import com.acme.products.model.provider.Provider;
 import graphql.schema.DataFetcher;
@@ -18,6 +20,9 @@ public class GraphQLDataFetchers implements DataFetcher {
 
     @Autowired
     private PackageRepo packageRepo;
+
+    @Autowired
+    private ProviderRepo providerRepo;
 
     @Override
     public Object get(DataFetchingEnvironment environment) throws Exception {
@@ -38,11 +43,24 @@ public class GraphQLDataFetchers implements DataFetcher {
 
                 System.out.println("Query criteria="+publicId+" "+destination+" "+numberNightsMin+" "+numberNightsMax);
 
+                // 1. Find the packages
+                ArrayList<Package> packagesList = packageRepo.findPackage(publicId,destination,numberNightsMin,numberNightsMax);
 
-                ArrayList packagesList = packageRepo.findPackage(publicId,destination,numberNightsMin,numberNightsMax);
-//                Package[] packages = new Package[1];
-//                packages[0] = new Package(100,"BAH", "this is a desc","Bahamas",3);
-                return packagesList ;
+                // 2. For each package
+                ArrayList<PackagesQueryModel>  packagesQueryModels = new ArrayList<>();
+                for(Package vPackage : packagesList){
+                    ArrayList<Integer> providerIds = vPackage.getProviders();
+
+                    // 3. For each provider ID, get the provider object
+                    ArrayList<Provider> providers = new ArrayList<>();
+                    for(Integer providerId : providerIds){
+                        Provider provider = providerRepo.findProvider(providerId);
+                        providers.add(provider);
+                    }
+                    packagesQueryModels.add(new PackagesQueryModel(vPackage, providers));
+                }
+
+                return packagesQueryModels ;
             }
         };
     }
@@ -50,10 +68,10 @@ public class GraphQLDataFetchers implements DataFetcher {
     public DataFetcher getProviderDataFetcher(){
 
         // Implements the DataFetcher using Lambda notation
-        return DataFetcher -> {
-            Provider[] providers = new Provider[1];
-            providers[0]=new HotelProvider("Hilton","this is descr",5);
-            return providers;
+        return dataFetchingEnvironment -> {
+            int id = dataFetchingEnvironment.containsArgument("id") ? dataFetchingEnvironment.getArgument("id") : -1 ;
+            System.out.println("Query criteria="+id);
+            return providerRepo.findProvider(id);
         };
     }
 }
