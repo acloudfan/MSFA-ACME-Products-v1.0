@@ -15,14 +15,15 @@ package com.acme.products.model.provider {
 }
 
 package com.acme.products.model {
-   class Package {
+   class Product {
     + publicId : String
     + description : String
     + providers : Provider[]
    }
 
-   Package "1" o-- "*" Provider
+   Product "1" o-- "*" Provider
 }
 
-title   "\n\nClass diagram for Products model"
+'title   "\n\nClass diagram for Products model\n\n"
+'footer  "Part of the course on Microservices"
 @enduml

@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * Pattern : Entity
  */
-public class Package {
+public class Product {
     public final int id;
     public final String publicId;
     public final String description;
@@ -31,7 +31,7 @@ public class Package {
     // Collection of providers
     private ArrayList<Provider> providers = new ArrayList<>();
 
-    public Package(int id, String publicId, String description, String destination, int numberNights,ArrayList<Provider> providers ) {
+    public Product(int id, String publicId, String description, String destination, int numberNights, ArrayList<Provider> providers ) {
         this.id = id;
         this.publicId = publicId;
         this.description = description;
