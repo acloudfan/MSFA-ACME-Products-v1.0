@@ -2,12 +2,12 @@
 #https://graphql.org/learn/schema/
 
 type Query {
-    products(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Package]
+    products(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Product]
     providers(id: Int!): Provider
 }
 
 # This is the representation the package
-type Package {
+type Product {
     publicId: String!
     description: String!
     numberNights: Int!
