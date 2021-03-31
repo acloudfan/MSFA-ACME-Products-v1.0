@@ -28,6 +28,10 @@ public class GraphQLDataFetchers implements DataFetcher {
         return null;
     }
 
+    /**
+     * Create the instance of the Product data fetcher
+     * @return
+     */
     public DataFetcher getPackageByPublicIdDataFetcher(){
 
         // Not using the Java Lambda for clarity
@@ -46,7 +50,7 @@ public class GraphQLDataFetchers implements DataFetcher {
                 ArrayList<Product> packagesList = productRepo.findPackage(publicId,destination,numberNightsMin,numberNightsMax);
 
                 // 2. For each package
-                ArrayList<PackagesQueryModel>  packagesQueryModels = new ArrayList<>();
+                ArrayList<ProductsQueryModel> productsQueryModels = new ArrayList<>();
                 for(Product vProduct : packagesList){
                     ArrayList<Integer> providerIds = vProduct.getProviders();
 
@@ -56,14 +60,18 @@ public class GraphQLDataFetchers implements DataFetcher {
                         Provider provider = providerRepo.findProvider(providerId);
                         providers.add(provider);
                     }
-                    packagesQueryModels.add(new PackagesQueryModel(vProduct, providers));
+                    productsQueryModels.add(new ProductsQueryModel(vProduct, providers));
                 }
 
-                return packagesQueryModels ;
+                return productsQueryModels;
             }
         };
     }
 
+    /**
+     * Create the Data Fetcher for Provider
+     * @return
+     */
     public DataFetcher getProviderDataFetcher(){
 
         // Implements the DataFetcher using Lambda notation

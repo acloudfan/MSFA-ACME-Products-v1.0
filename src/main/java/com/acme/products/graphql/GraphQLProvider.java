@@ -30,6 +30,7 @@ public class GraphQLProvider {
     @Autowired
     com.acme.products.graphql.GraphQLDataFetchers graphQLDataFetchers;
 
+    // Used for interacting with the server layer
     private GraphQL graphQL;
 
     @Bean
@@ -37,13 +38,21 @@ public class GraphQLProvider {
         return graphQL;
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     @PostConstruct
     public void init() throws IOException{
+
+        // 1. Read the SDL file
         URL url = Resources.getResource("root.graphqls");
-//        System.out.println(url.toString());
+
+        // 2. Setup the schema in runtime
         String sdl = Resources.toString(url, Charsets.UTF_8);
         GraphQLSchema graphQLSchema = buildSchema(sdl);
-        // This sets up the server schema
+
+        // 3. Setup the GraphQL instance
         this.graphQL = GraphQL.newGraphQL(graphQLSchema).build();
     }
 
@@ -58,12 +67,13 @@ public class GraphQLProvider {
     }
 
     /**
-     * Registers the Data Fetchers for the Packages and the Providers
+     * Registers the Data Fetchers for the Products and the Providers
+     * For each Query defined in the SDL there is a data fetcher object
      */
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query")
-                        .dataFetcher("packages", graphQLDataFetchers.getPackageByPublicIdDataFetcher()))
+                        .dataFetcher("products", graphQLDataFetchers.getPackageByPublicIdDataFetcher()))
                 .type(newTypeWiring("Query")
                         .dataFetcher("providers", graphQLDataFetchers.getProviderDataFetcher()))
                 .build();

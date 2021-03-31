@@ -5,7 +5,11 @@ import com.acme.products.model.provider.Provider;
 
 import java.util.ArrayList;
 
-public class PackagesQueryModel  {
+/**
+ * Resolver for the products query. Each field defined in the SDL query is exposed
+ * as a function.
+ */
+public class ProductsQueryModel {
 
     // Holds the package object
     private Product vProduct;
@@ -13,7 +17,7 @@ public class PackagesQueryModel  {
     // Holds the providers
     ArrayList<Provider>  providers;
 
-    public PackagesQueryModel(Product vProduct, ArrayList<Provider>  providers){
+    public ProductsQueryModel(Product vProduct, ArrayList<Provider>  providers){
         this.vProduct = vProduct;
         this.providers = providers;
     }
@@ -40,3 +44,4 @@ public class PackagesQueryModel  {
         return providers;
     }
 }
+

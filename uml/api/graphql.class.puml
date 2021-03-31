@@ -1,0 +1,54 @@
+@startuml
+
+top to bottom direction
+
+package com.acme.products.graphql {
+    class GraphQLProvider{
+    }
+    note left of GraphQLProvider
+        Main Runtime class for GraphQL
+    end note
+
+    class ProductsQueryModel{
+        <<GraphQL Products Resolver>>
+    }
+    note right of ProductsQueryModel
+        Resolver of object for the Products query
+        Fields in the SDL are defined as functions
+        in this class
+    end note
+
+    class GraphQLDataFetchers{
+        + DataFetcher getProductByPublicIdDataFetcher()
+        + DataFetcher getProviderDataFetcher()
+    }
+    note left of GraphQLDataFetchers
+        Factory for creating instances of GraphQLDataFetchers
+        Holds instances of Reposititory for fulfilling the
+        query requests issued by GraphQL server
+    end note
+
+    GraphQLProvider --> GraphQLDataFetchers : uses
+    GraphQLDataFetchers --> ProductsQueryModel : create instance
+}
+
+package com.acme.tests {
+
+
+    class ProductsFakeRepo implements com.acme.model.ProductRepo{
+    }
+
+    class ProviderFakeRepo implements com.acme.model.provider.ProviderRepo{
+    }
+
+    class RunProductsGraphQLApi{
+        + main()
+    }
+
+    GraphQLDataFetchers --> ProductsFakeRepo : uses
+    GraphQLDataFetchers --> ProviderFakeRepo : uses
+}
+RunProductsGraphQLApi --> GraphQLProvider : Launches
+
+
+@enduml
