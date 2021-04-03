@@ -7,6 +7,6 @@ import java.util.ArrayList;
  */
 public interface ProductRepo {
     // finds the package with given criteria
-    public ArrayList<Product> findPackage(String publicId, String destination, int minNumNights, int maxNumNights);
-    public boolean addPackage(Product vProduct);
+    public ArrayList<Product> findProducts(String publicId, String destination, int minNumNights, int maxNumNights);
+    public boolean addProduct(Product vProduct);
 }

@@ -38,7 +38,7 @@ public class ProductsRestAPIController {
                               @RequestParam(name="minNight", required=false, defaultValue = "0") int minNight,
                               @RequestParam(name="maxNight", required=false, defaultValue = "1000") int maxNight){
 
-        ArrayList<Product> products = productRepo.findPackage(publicId,dest,minNight,maxNight);
+        ArrayList<Product> products = productRepo.findProducts(publicId,dest,minNight,maxNight);
         String json ="[";
         boolean firstElement = true;
         for(Product p : products){

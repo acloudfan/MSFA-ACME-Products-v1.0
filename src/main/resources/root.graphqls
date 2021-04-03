@@ -2,7 +2,8 @@
 #https://graphql.org/learn/schema/
 
 type Query {
-    products(publicId: String, destination: String, numberNightsMin: Int, numberNightsMax: Int): [Product]
+    products(publicId: String, destination: String,
+        numberNightsMin: Int, numberNightsMax: Int): [Product]
     providers(id: Int!): Provider
 }
 
@@ -12,7 +13,7 @@ type Product {
     description: String!
     numberNights: Int!
     destination: String!
-    providers: [Provider!]
+    providers: [Provider!]!
 }
 
 # This is the representation for the provider type

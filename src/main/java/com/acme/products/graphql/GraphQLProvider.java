@@ -73,7 +73,7 @@ public class GraphQLProvider {
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query")
-                        .dataFetcher("products", graphQLDataFetchers.getPackageByPublicIdDataFetcher()))
+                        .dataFetcher("products", graphQLDataFetchers.getProductDataFetcher()))
                 .type(newTypeWiring("Query")
                         .dataFetcher("providers", graphQLDataFetchers.getProviderDataFetcher()))
                 .build();

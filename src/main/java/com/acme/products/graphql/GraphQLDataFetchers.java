@@ -32,7 +32,7 @@ public class GraphQLDataFetchers implements DataFetcher {
      * Create the instance of the Product data fetcher
      * @return
      */
-    public DataFetcher getPackageByPublicIdDataFetcher(){
+    public DataFetcher getProductDataFetcher(){
 
         // Not using the Java Lambda for clarity
         return new DataFetcher() {
@@ -47,7 +47,7 @@ public class GraphQLDataFetchers implements DataFetcher {
                 System.out.println("Query criteria="+publicId+" "+destination+" "+numberNightsMin+" "+numberNightsMax);
 
                 // 1. Find the packages
-                ArrayList<Product> packagesList = productRepo.findPackage(publicId,destination,numberNightsMin,numberNightsMax);
+                ArrayList<Product> packagesList = productRepo.findProducts(publicId,destination,numberNightsMin,numberNightsMax);
 
                 // 2. For each package
                 ArrayList<ProductsQueryModel> productsQueryModels = new ArrayList<>();

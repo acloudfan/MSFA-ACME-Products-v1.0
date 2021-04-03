@@ -16,7 +16,7 @@ public class ProductsFakeRepo implements ProductRepo {
 
 
     @Override
-    public ArrayList<Product> findPackage(String publicId, String destination, int minNumNights, int maxNumNights) {
+    public ArrayList<Product> findProducts(String publicId, String destination, int minNumNights, int maxNumNights) {
         ArrayList<Product> result = new ArrayList<>();
 
         for(Product p : collection){
@@ -42,7 +42,7 @@ public class ProductsFakeRepo implements ProductRepo {
     }
 
     @Override
-    public boolean addPackage(Product vProduct) {
+    public boolean addProduct(Product vProduct) {
 
         collection.add(vProduct);
 
@@ -63,21 +63,21 @@ public class ProductsFakeRepo implements ProductRepo {
 
         providers = new ArrayList<>();
         providers.add(Integer.valueOf(100));
-        productRepo.addPackage(new Product(1001,"BAH03CRUISE","This is a 3 night package","Bahamas",3, providers));
+        productRepo.addProduct(new Product(1001,"BAH03CRUISE","This is a 3 night package","Bahamas",3, providers));
 
         providers = new ArrayList<>();
         providers.add(Integer.valueOf(200));
-        productRepo.addPackage(new Product(1002,"BAH07CRUISE","This is a 7 night package","Bahamas",7, providers));
+        productRepo.addProduct(new Product(1002,"BAH07CRUISE","This is a 7 night package","Bahamas",7, providers));
 
         providers = new ArrayList<>();
         providers.add(Integer.valueOf(300));
         providers.add(Integer.valueOf(400));
-        productRepo.addPackage(new Product(1003,"DISNEY05RESORT","This is a 5 night get away to Disney in FL","Florida",5, providers));
+        productRepo.addProduct(new Product(1003,"DISNEY05RESORT","This is a 5 night get away to Disney in FL","Florida",5, providers));
 
         providers = new ArrayList<>();
         providers.add(Integer.valueOf(500));
         providers.add(Integer.valueOf(600));
-        productRepo.addPackage(new Product(1004,"JAMAICA07RESORT","This is a 7 night resort package","Jamaica",7, providers));
+        productRepo.addProduct(new Product(1004,"JAMAICA07RESORT","This is a 7 night resort package","Jamaica",7, providers));
 
         return productRepo;
     }
